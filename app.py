@@ -2,7 +2,7 @@ import os
 import json
 import uuid
 from flask import Flask, render_template, request, jsonify, session
-from utils.openai_helper import generate_ai_response
+from utils.gemini_helper import generate_ai_response
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key")

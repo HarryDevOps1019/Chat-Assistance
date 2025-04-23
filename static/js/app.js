@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Show welcome message if conversation is empty
                     chatMessages.innerHTML = `
                         <div class="welcome-message text-center my-5">
-                            <h2>AI Chat Assistant</h2>
+                            <h2>Gemini AI Chat Assistant</h2>
                             <p class="text-muted">Ask me anything and I'll do my best to assist you!</p>
                         </div>
                     `;
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Show welcome message if conversation is empty
                         chatMessages.innerHTML = `
                             <div class="welcome-message text-center my-5">
-                                <h2>AI Chat Assistant</h2>
+                                <h2>Gemini AI Chat Assistant</h2>
                                 <p class="text-muted">Ask me anything and I'll do my best to assist you!</p>
                             </div>
                         `;
