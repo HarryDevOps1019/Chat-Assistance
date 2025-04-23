@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const conversationsList = document.querySelector('.conversations-list');
     const conversationTitle = document.querySelector('.conversation-title');
     const loadingIndicator = document.getElementById('loading-indicator');
+    const themeSwitch = document.getElementById('themeSwitch');
 
     // Current active conversation ID
     let activeConversationId = null;
@@ -252,8 +253,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Clear the UI
                 chatMessages.innerHTML = `
                     <div class="welcome-message text-center my-5">
-                        <h2>AI Chat Assistant</h2>
-                        <p class="text-muted">Ask me anything and I'll do my best to assist you!</p>
+                        <div class="welcome-icon rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center">
+                            <span class="material-icons display-1">auto_awesome</span>
+                        </div>
+                        <h2>Galinda The Guide</h2>
+                        <p class="text-muted">Magical answers to all your questions!</p>
+                        <div class="suggestion-chips d-flex flex-wrap justify-content-center gap-2 mt-4">
+                            <button class="btn btn-sm btn-outline-primary suggestion-chip">Write a poem about AI</button>
+                            <button class="btn btn-sm btn-outline-primary suggestion-chip">Explain quantum computing</button>
+                            <button class="btn btn-sm btn-outline-primary suggestion-chip">JavaScript code example</button>
+                            <button class="btn btn-sm btn-outline-primary suggestion-chip">Create a story</button>
+                        </div>
                     </div>
                 `;
                 
@@ -383,8 +393,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Show welcome message if conversation is empty
                         chatMessages.innerHTML = `
                             <div class="welcome-message text-center my-5">
-                                <h2>Gemini AI Chat Assistant</h2>
-                                <p class="text-muted">Ask me anything and I'll do my best to assist you!</p>
+                                <div class="welcome-icon rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center">
+                                    <span class="material-icons display-1">auto_awesome</span>
+                                </div>
+                                <h2>Galinda The Guide</h2>
+                                <p class="text-muted">Magical answers to all your questions!</p>
+                                <div class="suggestion-chips d-flex flex-wrap justify-content-center gap-2 mt-4">
+                                    <button class="btn btn-sm btn-outline-primary suggestion-chip">Write a poem about magic</button>
+                                    <button class="btn btn-sm btn-outline-primary suggestion-chip">Tell me a fun fact</button>
+                                    <button class="btn btn-sm btn-outline-primary suggestion-chip">Python code example</button>
+                                    <button class="btn btn-sm btn-outline-primary suggestion-chip">Tell me a story</button>
+                                </div>
                             </div>
                         `;
                     }
@@ -499,9 +518,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Theme switcher functionality
+    function setupThemeSwitcher() {
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const htmlElement = document.documentElement;
+        
+        // Initialize theme based on saved preference or default to dark
+        if (savedTheme === 'light') {
+            htmlElement.setAttribute('data-bs-theme', 'light');
+            themeSwitch.checked = false;
+            updateThemeIcon(false);
+        } else {
+            htmlElement.setAttribute('data-bs-theme', 'dark');
+            themeSwitch.checked = true;
+            updateThemeIcon(true);
+        }
+        
+        // Handle theme toggle
+        themeSwitch.addEventListener('change', function() {
+            const isDarkMode = this.checked;
+            
+            // Set the theme attribute
+            htmlElement.setAttribute('data-bs-theme', isDarkMode ? 'dark' : 'light');
+            
+            // Save preference
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Update theme icon and text
+            updateThemeIcon(isDarkMode);
+        });
+    }
+    
+    // Update the theme icon and text based on current mode
+    function updateThemeIcon(isDarkMode) {
+        const themeIcon = document.querySelector('.theme-icon');
+        const themeText = document.querySelector('.theme-text');
+        
+        if (isDarkMode) {
+            themeIcon.textContent = 'dark_mode';
+            themeText.textContent = 'Dark Mode';
+        } else {
+            themeIcon.textContent = 'light_mode';
+            themeText.textContent = 'Light Mode';
+        }
+    }
+
     // Initialize
     initChat();
     
     // Setup suggestion chips after the DOM is fully loaded
     setupSuggestionChips();
+    
+    // Initialize theme switcher
+    setupThemeSwitcher();
 });

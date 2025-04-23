@@ -32,6 +32,68 @@ body {
     font-size: 2rem;
 }
 
+/* Theme switcher styles */
+.theme-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-info);
+    border-color: var(--bs-info);
+}
+
+.form-switch .form-check-input {
+    height: 1.2rem;
+    width: 2.4rem;
+    cursor: pointer;
+}
+
+.form-check-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    color: var(--bs-light);
+}
+
+.theme-icon {
+    font-size: 1.1rem;
+    margin-right: 0.5rem;
+}
+
+/* Light mode specific styles */
+html[data-bs-theme="light"] {
+    --chat-bg: #f8f9fa;
+    --sidebar-bg: #ffffff;
+    --message-user-bg: #e9f5ff;
+    --message-assistant-bg: #f1f3f5;
+    --welcome-icon-bg: rgba(13, 110, 253, 0.1);
+}
+
+html[data-bs-theme="light"] .sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+html[data-bs-theme="light"] .chat-header {
+    background-color: rgba(0, 0, 0, 0.03);
+}
+
+html[data-bs-theme="light"] .welcome-icon {
+    background-color: var(--welcome-icon-bg);
+    color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+html[data-bs-theme="light"] .message.user-message {
+    background-color: var(--message-user-bg);
+}
+
+html[data-bs-theme="light"] .message.assistant-message {
+    background-color: var(--message-assistant-bg);
+}
+
 .avatar-placeholder {
     width: 36px;
     height: 36px;

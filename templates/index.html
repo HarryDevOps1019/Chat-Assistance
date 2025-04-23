@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini AI Chat Assistant</title>
+    <title>Galinda The Guide</title>
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧙</text></svg>">
     <!-- Bootstrap CSS (Replit theme) -->
     <link href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet">
     <!-- Font Awesome for icons -->
@@ -25,8 +25,8 @@
         <div id="sidebar" class="sidebar shadow-lg d-flex flex-column">
             <div class="p-3 sidebar-header">
                 <div class="app-brand mb-3 text-center">
-                    <span class="material-icons gemini-icon me-2">smart_toy</span>
-                    <span class="fw-bold">Gemini AI Assistant</span>
+                    <span class="material-icons gemini-icon me-2">auto_awesome</span>
+                    <span class="fw-bold">Galinda The Guide</span>
                 </div>
                 <button id="new-chat-btn" class="btn btn-primary w-100 d-flex align-items-center justify-content-center mb-2">
                     <i class="fas fa-plus-circle me-2"></i> New chat
@@ -38,11 +38,24 @@
             </div>
             
             <div class="sidebar-footer p-3 border-top">
-                <div class="d-flex align-items-center">
-                    <span class="avatar-placeholder rounded-circle me-2">
-                        <i class="material-icons">person</i>
-                    </span>
-                    <span class="text-light">Powered by Google Gemini</span>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex align-items-center">
+                        <span class="avatar-placeholder rounded-circle me-2">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <span class="text-light">Powered by Google Gemini</span>
+                    </div>
+                    
+                    <!-- Theme switcher -->
+                    <div class="theme-switcher mt-2">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="themeSwitch">
+                            <label class="form-check-label" for="themeSwitch">
+                                <i class="material-icons theme-icon">dark_mode</i>
+                                <span class="theme-text">Dark Mode</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,10 +83,10 @@
                 <!-- Messages will be populated here by JavaScript -->
                 <div class="welcome-message text-center my-5">
                     <div class="welcome-icon rounded-circle mx-auto mb-4 d-flex align-items-center justify-content-center">
-                        <span class="material-icons display-1">smart_toy</span>
+                        <span class="material-icons display-1">auto_awesome</span>
                     </div>
-                    <h2>Gemini AI Chat Assistant</h2>
-                    <p class="text-muted">Ask me anything and I'll do my best to assist you!</p>
+                    <h2>Galinda The Guide</h2>
+                    <p class="text-muted">Magical answers to all your questions!</p>
                     <div class="suggestion-chips d-flex flex-wrap justify-content-center gap-2 mt-4">
                         <button class="btn btn-sm btn-outline-primary suggestion-chip">Write a poem about AI</button>
                         <button class="btn btn-sm btn-outline-primary suggestion-chip">Explain quantum computing</button>
@@ -86,7 +99,7 @@
             <!-- Message input area -->
             <div class="message-input p-3 border-top">
                 <form id="message-form" class="position-relative message-form-container">
-                    <textarea id="message-input" class="form-control rounded-pill" placeholder="Message Gemini..." rows="1"></textarea>
+                    <textarea id="message-input" class="form-control rounded-pill" placeholder="Ask Galinda something magical..." rows="1"></textarea>
                     <button type="submit" id="send-button" class="btn btn-primary rounded-circle position-absolute" style="bottom: 6px; right: 8px;">
                         <i class="material-icons">send</i>
                     </button>
