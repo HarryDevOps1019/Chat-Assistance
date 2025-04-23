@@ -488,7 +488,20 @@ document.addEventListener('DOMContentLoaded', function() {
     function scrollToBottom() {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
+    
+    // Handle suggestion chips
+    function setupSuggestionChips() {
+        document.querySelectorAll('.suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                messageInput.value = this.textContent;
+                messageForm.dispatchEvent(new Event('submit'));
+            });
+        });
+    }
 
     // Initialize
     initChat();
+    
+    // Setup suggestion chips after the DOM is fully loaded
+    setupSuggestionChips();
 });
