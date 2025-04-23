@@ -1,0 +1,224 @@
+/* Main layout */
+body {
+    overflow: hidden;
+    background-color: var(--bs-dark);
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 280px;
+    background-color: var(--bs-dark);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.avatar-placeholder {
+    width: 30px;
+    height: 30px;
+    background-color: var(--bs-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--bs-light);
+}
+
+.conversation-item {
+    cursor: pointer;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.conversation-item.active {
+    background-color: var(--bs-primary-bg-subtle);
+}
+
+.conversation-item:hover:not(.active) {
+    background-color: var(--bs-secondary-bg-subtle);
+}
+
+.conversation-item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+}
+
+.delete-conversation-btn {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s;
+}
+
+.conversation-item:hover .delete-conversation-btn {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Chat area */
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+}
+
+.message {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-width: 95%;
+}
+
+.message.user-message {
+    background-color: var(--bs-primary-bg-subtle);
+    align-self: flex-end;
+}
+
+.message.assistant-message {
+    background-color: var(--bs-secondary-bg-subtle);
+    align-self: flex-start;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bs-primary);
+    color: white;
+    flex-shrink: 0;
+}
+
+.assistant-avatar {
+    background-color: var(--bs-info);
+}
+
+.message-content {
+    flex-grow: 1;
+    overflow-wrap: break-word;
+}
+
+.message-content pre {
+    background-color: var(--bs-tertiary-bg);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+}
+
+.message-content code {
+    font-family: monospace;
+}
+
+.message-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.message-actions button {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.message-actions button:hover {
+    opacity: 1;
+}
+
+/* Message input area */
+.message-input {
+    width: 100%;
+}
+
+#message-input {
+    padding-right: 50px; /* Space for send button */
+    resize: none;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+#send-button {
+    padding: 0.25rem 0.75rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        height: 100%;
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+}
+
+/* Welcome message */
+.welcome-message {
+    color: var(--bs-light);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Loading indicator */
+#loading-indicator {
+    z-index: 2000;
+}
+
+/* Markdown styling for messages */
+.message-content h1, 
+.message-content h2, 
+.message-content h3, 
+.message-content h4, 
+.message-content h5, 
+.message-content h6 {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.message-content p {
+    margin-bottom: 1rem;
+}
+
+.message-content ul, 
+.message-content ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.message-content blockquote {
+    border-left: 4px solid var(--bs-secondary);
+    padding-left: 1rem;
+    margin-left: 0;
+    color: var(--bs-secondary);
+}
+
+.message-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.message-content table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.message-content table th,
+.message-content table td {
+    padding: 0.5rem;
+    border: 1px solid var(--bs-secondary);
+}
+
+.message-content hr {
+    margin: 1.5rem 0;
+}
