@@ -19,54 +19,35 @@ def generate_ai_response(messages):
     """
     try:
         # Create a system prompt
-        system_prompt = "You are a helpful, creative, and knowledgeable assistant. Provide detailed, accurate responses. When you include code snippets, make sure they are functional and properly formatted. Format your responses using markdown for better readability."
-        
-        # Get the latest Gemini Pro model
-        model = genai.GenerativeModel('gemini-pro')
+        system_message = {
+            "role": "system",
+            "parts": ["You are a helpful, creative, and knowledgeable assistant. Provide detailed, accurate responses. When you include code snippets, make sure they are functional and properly formatted. Format your responses using markdown for better readability."]
+        }
         
         # Format the conversation history for Gemini
-        # Convert OpenAI format to Gemini format
-        gemini_messages = []
+        gemini_messages = [system_message]
         
         for msg in messages:
             role = msg["role"]
             content = msg["content"]
             
-            # Map OpenAI roles to Gemini roles
+            # Map OpenAI roles to Gemini roles (user stays as user, assistant becomes model)
             if role == "user":
                 gemini_messages.append({"role": "user", "parts": [content]})
             elif role == "assistant":
                 gemini_messages.append({"role": "model", "parts": [content]})
         
-        # Create the chat session
-        chat = model.start_chat(history=[])
+        # Get the latest Gemini model
+        # Using gemini-1.5-pro which is the current model (as of April 2025)
+        model = genai.GenerativeModel("gemini-1.5-pro")
         
-        # Add system prompt as the first user message if no messages exist
-        if not gemini_messages:
-            response = chat.send_message(system_prompt)
-            return response.text
+        # Generate content with the conversation history
+        response = model.generate_content(gemini_messages)
         
-        # Load the conversation history
-        for msg in gemini_messages:
-            if msg["role"] == "user":
-                chat.send_message(msg["parts"][0])
-            # For model messages, we don't need to do anything as they're already in the history
-        
-        # Get the last user message to respond to
-        last_user_message = None
-        for msg in reversed(gemini_messages):
-            if msg["role"] == "user":
-                last_user_message = msg["parts"][0]
-                break
-        
-        # If there's a user message to respond to
-        if last_user_message:
-            response = chat.send_message(last_user_message)
-            return response.text
-        else:
-            # Fallback if no user message is found
-            response = chat.send_message("Hello, how can I help you today?")
-            return response.text
+        return response.text
             
     except Exception as e:
-        return f"Sorry, I encountered an error: {str(e)}"
+        # Output detailed error for debugging
+        error_message = f"Sorry, I encountered an error with the Gemini API: {str(e)}"
+        print(error_message)  # Log to console for debugging
+        return error_message
