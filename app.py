@@ -2,10 +2,23 @@ import os
 import json
 import uuid
 from flask import Flask, render_template, request, jsonify, session
+from dotenv import load_dotenv
+import google.generativeai as genai
 from utils.gemini_helper import generate_ai_response
 
+# Load environment variables
+load_dotenv()
+
+# Initialize Flask app
 app = Flask(__name__)
 app.secret_key = os.environ.get("SESSION_SECRET", "dev_secret_key")
+
+# Configure Google Gemini API
+api_key = os.getenv("GOOGLE_API_KEY")
+if not api_key:
+    raise ValueError("No API key found. Please set GOOGLE_API_KEY in .env file")
+
+genai.configure(api_key=api_key)
 
 @app.route('/')
 def index():
@@ -188,3 +201,25 @@ def clear_conversation():
     
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/api/conversations', methods=['GET'])
+def get_conversations():
+    """Get all conversations."""
+    try:
+        if 'conversations' not in session:
+            return jsonify([])
+            
+        result = []
+        for id, conversation in session['conversations'].items():
+            result.append({
+                'id': id,
+                'title': conversation['title']
+            })
+            
+        return jsonify(result)
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
